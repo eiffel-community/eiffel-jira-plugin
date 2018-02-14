@@ -1,0 +1,216 @@
+{
+  "timestamp": 1517840805048,
+  "webhookEvent": "jira:issue_created",
+  "issue_event_type_name": "issue_created",
+  "user": {
+    "self": "https://eiffelplugin.atlassian.net/rest/api/2/user?username=admin",
+    "name": "admin",
+    "key": "admin",
+    "accountId": "5a6d37576f1515570b9b0fc1",
+    "emailAddress": "bob.barker@thepriceisright.com",
+    "avatarUrls": {
+      "48x48": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=48&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D48%26noRedirect%3Dtrue",
+      "24x24": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=24&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D24%26noRedirect%3Dtrue",
+      "16x16": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=16&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D16%26noRedirect%3Dtrue",
+      "32x32": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=32&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D32%26noRedirect%3Dtrue"
+    },
+    "displayName": "Bob Barker",
+    "active": true,
+    "timeZone": "America/Chicago"
+  },
+  "issue": {
+    "id": "10032",
+    "self": "https://eiffelplugin.atlassian.net/rest/api/2/issue/10032",
+    "key": "TP-33",
+    "fields": {
+      "issuetype": {
+        "self": "https://eiffelplugin.atlassian.net/rest/api/2/issuetype/10000",
+        "id": "10000",
+        "description": "A big user story that needs to be broken down. Created by Jira Software - do not edit or delete.",
+        "iconUrl": "https://eiffelplugin.atlassian.net/images/icons/issuetypes/epic.svg",
+        "name": "Epic",
+        "subtask": false
+      },
+      "timespent": null,
+      "project": {
+        "self": "https://eiffelplugin.atlassian.net/rest/api/2/project/10000",
+        "id": "10000",
+        "key": "TP",
+        "name": "Test Project",
+        "projectTypeKey": "software",
+        "avatarUrls": {
+          "48x48": "https://eiffelplugin.atlassian.net/secure/projectavatar?avatarId=10324",
+          "24x24": "https://eiffelplugin.atlassian.net/secure/projectavatar?size=small&avatarId=10324",
+          "16x16": "https://eiffelplugin.atlassian.net/secure/projectavatar?size=xsmall&avatarId=10324",
+          "32x32": "https://eiffelplugin.atlassian.net/secure/projectavatar?size=medium&avatarId=10324"
+        }
+      },
+      "fixVersions": [],
+      "aggregatetimespent": null,
+      "resolution": null,
+      "customfield_10027": null,
+      "customfield_10028": null,
+      "resolutiondate": null,
+      "workratio": -1,
+      "lastViewed": null,
+      "watches": {
+        "self": "https://eiffelplugin.atlassian.net/rest/api/2/issue/TP-33/watchers",
+        "watchCount": 0,
+        "isWatching": false
+      },
+      "created": "2018-02-05T08:26:44.992-0600",
+      "customfield_10022": null,
+      "customfield_10023": null,
+      "priority": {
+        "self": "https://eiffelplugin.atlassian.net/rest/api/2/priority/3",
+        "iconUrl": "https://eiffelplugin.atlassian.net/images/icons/priorities/medium.svg",
+        "name": "Medium",
+        "id": "3"
+      },
+      "customfield_10024": null,
+      "customfield_10025": null,
+      "labels": [],
+      "customfield_10026": null,
+      "customfield_10016": null,
+      "customfield_10017": null,
+      "customfield_10018": null,
+      "customfield_10019": null,
+      "timeestimate": null,
+      "aggregatetimeoriginalestimate": null,
+      "versions": [],
+      "issuelinks": [],
+      "assignee": null,
+      "updated": "2018-02-05T08:26:44.992-0600",
+      "status": {
+        "self": "https://eiffelplugin.atlassian.net/rest/api/2/status/10000",
+        "description": "",
+        "iconUrl": "https://eiffelplugin.atlassian.net/",
+        "name": "To Do",
+        "id": "10000",
+        "statusCategory": {
+          "self": "https://eiffelplugin.atlassian.net/rest/api/2/statuscategory/2",
+          "id": 2,
+          "key": "new",
+          "colorName": "blue-gray",
+          "name": "New"
+        }
+      },
+      "components": [],
+      "timeoriginalestimate": null,
+      "description": "Epic description",
+      "customfield_10010": [
+        "com.atlassian.greenhopper.service.sprint.Sprint@28c92820[id=1,rapidViewId=1,state=ACTIVE,name=Sample Sprint 2,goal=<null>,startDate=2018-01-20T17:38:33.365Z,endDate=2018-02-03T17:58:33.365Z,completeDate=<null>,sequence=1]"
+      ],
+      "customfield_10011": "1|i0001r:",
+      "customfield_10012": null,
+      "customfield_10013": null,
+      "customfield_10014": null,
+      "customfield_10015": [],
+      "timetracking": {},
+      "customfield_10005": "Epic2",
+      "customfield_10006": {
+        "self": "https://eiffelplugin.atlassian.net/rest/api/2/customFieldOption/10000",
+        "value": "To Do",
+        "id": "10000"
+      },
+      "customfield_10007": "ghx-label-10",
+      "security": null,
+      "customfield_10008": null,
+      "aggregatetimeestimate": null,
+      "attachment": [],
+      "customfield_10009": null,
+      "summary": "Epic summary",
+      "creator": {
+        "self": "https://eiffelplugin.atlassian.net/rest/api/2/user?username=admin",
+        "name": "admin",
+        "key": "admin",
+        "accountId": "5a6d37576f1515570b9b0fc1",
+        "emailAddress": "bob.barker@thepriceisright.com",
+        "avatarUrls": {
+          "48x48": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=48&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D48%26noRedirect%3Dtrue",
+          "24x24": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=24&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D24%26noRedirect%3Dtrue",
+          "16x16": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=16&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D16%26noRedirect%3Dtrue",
+          "32x32": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=32&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D32%26noRedirect%3Dtrue"
+        },
+        "displayName": "Bob Barker",
+        "active": true,
+        "timeZone": "America/Chicago"
+      },
+      "subtasks": [],
+      "reporter": {
+        "self": "https://eiffelplugin.atlassian.net/rest/api/2/user?username=admin",
+        "name": "admin",
+        "key": "admin",
+        "accountId": "5a6d37576f1515570b9b0fc1",
+        "emailAddress": "bob.barker@thepriceisright.com",
+        "avatarUrls": {
+          "48x48": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=48&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D48%26noRedirect%3Dtrue",
+          "24x24": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=24&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D24%26noRedirect%3Dtrue",
+          "16x16": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=16&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D16%26noRedirect%3Dtrue",
+          "32x32": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=32&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D32%26noRedirect%3Dtrue"
+        },
+        "displayName": "Bob Barker",
+        "active": true,
+        "timeZone": "America/Chicago"
+      },
+      "customfield_10000": "{}",
+      "aggregateprogress": {
+        "progress": 0,
+        "total": 0
+      },
+      "customfield_10001": null,
+      "customfield_10002": null,
+      "customfield_10003": null,
+      "customfield_10004": null,
+      "environment": null,
+      "duedate": null,
+      "progress": {
+        "progress": 0,
+        "total": 0
+      },
+      "votes": {
+        "self": "https://eiffelplugin.atlassian.net/rest/api/2/issue/TP-33/votes",
+        "votes": 0,
+        "hasVoted": false
+      },
+      "comment": {
+        "comments": [],
+        "maxResults": 0,
+        "total": 0,
+        "startAt": 0
+      }
+    }
+  },
+  "changelog": {
+    "id": "10045",
+    "items": [
+      {
+        "field": "Status",
+        "fieldtype": "jira",
+        "fieldId": "status",
+        "from": null,
+        "fromString": null,
+        "to": "10000",
+        "toString": "To Do"
+      },
+      {
+        "field": "reporter",
+        "fieldtype": "jira",
+        "fieldId": "reporter",
+        "from": null,
+        "fromString": null,
+        "to": "admin",
+        "toString": "Bob Barker"
+      },
+      {
+        "field": "priority",
+        "fieldtype": "jira",
+        "fieldId": "priority",
+        "from": null,
+        "fromString": null,
+        "to": "3",
+        "toString": "Medium"
+      }
+    ]
+  }
+}
