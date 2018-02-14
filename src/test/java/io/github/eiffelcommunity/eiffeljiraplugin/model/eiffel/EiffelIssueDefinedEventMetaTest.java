@@ -16,14 +16,28 @@
 
 package io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
 
-import com.google.errorprone.annotations.Immutable;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.UUID;
+@RunWith(SpringRunner.class)
+public class EiffelIssueDefinedEventMetaTest {
 
-@Immutable
-public interface Link {
+    @Before
+    public void setUp() {
+    }
 
-    LinkType getType();
+    @After
+    public void tearDown() {
+    }
 
-    UUID getTarget();
+    @Test
+    public void noArgsBuilderHasOnlyDefaultFields() {
+        EiffelIssueDefinedEvent100Meta meta = new EiffelIssueDefinedEvent100Meta.Builder().build();
+        Assert.assertFalse(meta.getSource().isPresent());
+        Assert.assertFalse(meta.getTags().isPresent());
+    }
 }

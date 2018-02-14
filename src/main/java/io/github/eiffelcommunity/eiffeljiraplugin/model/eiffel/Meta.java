@@ -17,13 +17,17 @@
 package io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
 
 import com.google.errorprone.annotations.Immutable;
+import com.vdurmont.semver4j.Semver;
 
 import java.util.UUID;
 
 @Immutable
-public interface Link {
+public interface Meta {
+    default UUID getId() {
+        return UUID.randomUUID();
+    }
 
-    LinkType getType();
+    EventType getType();
 
-    UUID getTarget();
+    Semver getVersion();
 }

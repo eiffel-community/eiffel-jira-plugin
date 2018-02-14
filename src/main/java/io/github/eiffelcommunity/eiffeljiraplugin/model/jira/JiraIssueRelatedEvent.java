@@ -19,16 +19,19 @@ package io.github.eiffelcommunity.eiffeljiraplugin.model.jira;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.github.eiffelcommunity.eiffeljiraplugin.model.EiffelStyleImmutable;
 import org.immutables.value.Value;
 
 @Value.Immutable
-@JsonSerialize
-@JsonDeserialize
+@EiffelStyleImmutable
 @JsonIgnoreProperties(ignoreUnknown = true)
-public interface JiraIssueRelatedEvent {
+@JsonDeserialize(builder = JiraIssueRelatedEvent.Builder.class)
+public abstract class JiraIssueRelatedEvent {
     @JsonProperty("issue_event_type_name")
-    String eventType();
+    public abstract String getEventType();
 
-    ImmutableJiraIssue issue();
+    public abstract JiraIssue getIssue();
+
+    public static class Builder extends ImmutableJiraIssueRelatedEvent.Builder {
+    }
 }

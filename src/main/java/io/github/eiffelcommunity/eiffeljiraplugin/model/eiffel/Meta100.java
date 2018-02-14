@@ -18,12 +18,17 @@ package io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
 
 import com.google.errorprone.annotations.Immutable;
 
-import java.util.UUID;
+import java.util.List;
+import java.util.Optional;
 
 @Immutable
-public interface Link {
+public interface Meta100 extends Meta {
 
-    LinkType getType();
+    default long getTime() {
+        return System.currentTimeMillis();
+    }
 
-    UUID getTarget();
+    Optional<List<String>> getTags();
+
+    Optional<Source> getSource();
 }

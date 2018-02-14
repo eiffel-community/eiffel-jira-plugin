@@ -16,14 +16,21 @@
 
 package io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
 
-import com.google.errorprone.annotations.Immutable;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.github.eiffelcommunity.eiffeljiraplugin.model.EiffelStyleTuple;
+import org.immutables.value.Value;
 
-import java.util.UUID;
+@Value.Immutable
+@EiffelStyleTuple
+@JsonSerialize(as = ImmutableCustomDataEntry.class)
+@JsonDeserialize(as = ImmutableCustomDataEntry.class)
+public abstract class CustomDataEntry {
+    public static CustomDataEntry of(String key, Object value) {
+        return ImmutableCustomDataEntry.of(key, value);
+    }
 
-@Immutable
-public interface Link {
+    public abstract String getKey();
 
-    LinkType getType();
-
-    UUID getTarget();
+    public abstract Object getValue();
 }

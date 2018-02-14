@@ -14,22 +14,36 @@
  * limitations under the License.
  */
 
-package io.github.eiffelcommunity.eiffeljiraplugin.model.jira;
+package io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.collect.ImmutableSet;
 import io.github.eiffelcommunity.eiffeljiraplugin.model.EiffelStyleImmutable;
 import org.immutables.value.Value;
 
+import java.util.Set;
+
 @Value.Immutable
 @EiffelStyleImmutable
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonDeserialize(builder = JiraIssueFields.Builder.class)
-public abstract class JiraIssueFields {
-    @JsonProperty("issuetype")
-    public abstract JiraFieldsIssueType getFieldsIssueType();
+@JsonSerialize(as = EiffelIssueDefinedEvent100.class)
+@JsonDeserialize(builder = EiffelIssueDefinedEvent100.Builder.class)
+public abstract class EiffelIssueDefinedEvent100 extends EventImpl implements Event {
 
-    public static class Builder extends ImmutableJiraIssueFields.Builder {
+    @Override
+    public abstract EiffelIssueDefinedEvent100Meta getMeta();
+
+    public abstract EiffelIssueDefinedEvent100Data getData();
+
+    @Override
+    public abstract ImmutableSet<Link> getLinks();
+
+
+    @Value.Check
+    protected void check() {
+        checkLinks();
+    }
+
+    public static class Builder extends ImmutableEiffelIssueDefinedEvent100.Builder {
     }
 }

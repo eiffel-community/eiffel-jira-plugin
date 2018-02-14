@@ -16,37 +16,39 @@
 
 package io.github.eiffelcommunity.eiffeljiraplugin.service;
 
-import io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.*;
-import io.github.eiffelcommunity.eiffeljiraplugin.model.jira.ImmutableJiraIssue;
+import io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.EiffelIssueDefinedEvent100;
+import io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.EiffelIssueDefinedEvent100Data;
+import io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.EiffelIssueDefinedEvent100Meta;
+import io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.EiffelIssueType;
+import io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.LinkImpl;
+import io.github.eiffelcommunity.eiffeljiraplugin.model.jira.JiraIssue;
 import io.github.eiffelcommunity.eiffeljiraplugin.model.jira.JiraIssueType;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class JiraEiffelMappingServiceImpl implements JiraEiffelMappingService {
     private static final String JIRA_TRACKER = "JIRA";
-    // TODO: Consider ways to support versioning of the event.
-    private static final String EIFFEL_ISSUE_DEFINED_EVENT_VERSION = "1.0.0";
 
     @Override
-    public ImmutableEiffelIssueDefinedEvent toEiffelIssueDefinedEvent(ImmutableJiraIssue jiraIssue) {
-        ImmutableEiffelIssueDefinedEventMeta meta = ImmutableEiffelIssueDefinedEventMeta.builder().build();
+    public EiffelIssueDefinedEvent100 toEiffelIssueDefinedEvent100(JiraIssue jiraIssue) {
+        EiffelIssueDefinedEvent100Meta meta = new EiffelIssueDefinedEvent100Meta.Builder().build();
 
-        ImmutableEiffelIssueDefinedEventData data = ImmutableEiffelIssueDefinedEventData.builder()
-                .id(jiraIssue.id())
-                .uri(jiraIssue.self())
-                .tracker(JIRA_TRACKER)
-                .type(toEiffelIssueType(jiraIssue.fields().issueType().issueType()))
+        EiffelIssueDefinedEvent100Data data = new EiffelIssueDefinedEvent100Data.Builder()
+                .setId(jiraIssue.getId())
+                .setUri(jiraIssue.getSelf())
+                .setTracker(JIRA_TRACKER)
+                .setType(toEiffelIssueType(jiraIssue.getFields().getFieldsIssueType().getIssueType()))
                 .build();
 
-        List<Link> links = new ArrayList<>();
+        Set<LinkImpl> links = new HashSet<>();
 
-        return ImmutableEiffelIssueDefinedEvent.builder()
-                .meta(meta)
-                .data(data)
-                .links(links)
+        return new EiffelIssueDefinedEvent100.Builder()
+                .setMeta(meta)
+                .setData(data)
+                .setLinks(links)
                 .build();
     }
 

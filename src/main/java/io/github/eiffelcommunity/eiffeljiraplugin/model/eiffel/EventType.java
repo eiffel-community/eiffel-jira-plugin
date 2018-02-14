@@ -16,14 +16,15 @@
 
 package io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.errorprone.annotations.Immutable;
 
-import java.util.UUID;
-
 @Immutable
-public interface Link {
+public interface EventType {
 
-    LinkType getType();
+    String getName();
 
-    UUID getTarget();
+    ImmutableSet<LinkType> getRequiredLinkTypes();
+
+    ImmutableSet<LinkType> getOptionalLinkTypes();
 }

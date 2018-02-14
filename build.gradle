@@ -44,6 +44,8 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-amqp')
 	compile('org.springframework.boot:spring-boot-starter-web')
     compile('com.fasterxml.jackson.datatype:jackson-datatype-jdk8')
+	compile('com.vdurmont:semver4j:2.2.0')
+	compile('com.google.guava:guava:24.0-jre')
     compileOnly('org.immutables:value:2.5.5')
 	runtime('org.springframework.boot:spring-boot-devtools')
 	testCompile('org.springframework.boot:spring-boot-starter-test')

@@ -18,27 +18,39 @@ package io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.base.Preconditions;
+import com.google.errorprone.annotations.Immutable;
+import com.vdurmont.semver4j.Semver;
 import io.github.eiffelcommunity.eiffeljiraplugin.model.EiffelStyleImmutable;
 import org.immutables.value.Value;
 
-import java.net.URI;
-import java.util.Optional;
 
 @Value.Immutable
 @EiffelStyleImmutable
-@JsonSerialize(as = ImmutableSource.class)
-@JsonDeserialize(builder = Source.Builder.class)
-public abstract class Source {
-    public abstract Optional<String> getDomainId();
+@JsonSerialize(as = ImmutableEiffelIssueDefinedEvent100Meta.class)
+@JsonDeserialize(builder = EiffelIssueDefinedEvent100Meta.Builder.class)
+public abstract class EiffelIssueDefinedEvent100Meta implements Meta100 {
+    private final static EventType type = UnofficialEventType.EIFFEL_ISSUE_DEFINED_EVENT;
+    private final static Semver version = new Semver("1.0.0");
 
-    public abstract Optional<String> getHost();
+    @Override
+    @Value.Default
+    public EventType getType() {
+        return type;
+    }
 
-    public abstract Optional<String> getName();
+    @Override
+    @Value.Default
+    public Semver getVersion() {
+        return version;
+    }
 
-    public abstract Optional<Serializer> getSerializer();
+    @Value.Check
+    protected void check() {
+        Preconditions.checkState(type.equals(getType()));
+        Preconditions.checkState(version.equals(getVersion()));
+    }
 
-    public abstract Optional<URI> getUri();
-
-    public static class Builder extends ImmutableSource.Builder {
+    public static class Builder extends ImmutableEiffelIssueDefinedEvent100Meta.Builder {
     }
 }
