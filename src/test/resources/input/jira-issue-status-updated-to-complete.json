@@ -1,0 +1,214 @@
+{
+  "timestamp": 1520270021381,
+  "webhookEvent": "jira:issue_updated",
+  "issue_event_type_name": "issue_generic",
+  "user": {
+    "self": "https://eiffelplugin.atlassian.net/rest/api/2/user?username=admin",
+    "name": "admin",
+    "key": "admin",
+    "accountId": "5a6d37576f1515570b9b0fc1",
+    "emailAddress": "bob@barker.com",
+    "avatarUrls": {
+      "48x48": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=48&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D48%26noRedirect%3Dtrue",
+      "24x24": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=24&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D24%26noRedirect%3Dtrue",
+      "16x16": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=16&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D16%26noRedirect%3Dtrue",
+      "32x32": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=32&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D32%26noRedirect%3Dtrue"
+    },
+    "displayName": "Bob Barker",
+    "active": true,
+    "timeZone": "America/Chicago"
+  },
+  "issue": {
+    "id": "10042",
+    "self": "https://eiffelplugin.atlassian.net/rest/api/2/issue/10042",
+    "key": "TP-43",
+    "fields": {
+      "issuetype": {
+        "self": "https://eiffelplugin.atlassian.net/rest/api/2/issuetype/10002",
+        "id": "10002",
+        "description": "A task that needs to be done.",
+        "iconUrl": "https://eiffelplugin.atlassian.net/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+        "name": "Task",
+        "subtask": false,
+        "avatarId": 10318
+      },
+      "timespent": null,
+      "project": {
+        "self": "https://eiffelplugin.atlassian.net/rest/api/2/project/10000",
+        "id": "10000",
+        "key": "TP",
+        "name": "Test Project",
+        "projectTypeKey": "software",
+        "avatarUrls": {
+          "48x48": "https://eiffelplugin.atlassian.net/secure/projectavatar?avatarId=10324",
+          "24x24": "https://eiffelplugin.atlassian.net/secure/projectavatar?size=small&avatarId=10324",
+          "16x16": "https://eiffelplugin.atlassian.net/secure/projectavatar?size=xsmall&avatarId=10324",
+          "32x32": "https://eiffelplugin.atlassian.net/secure/projectavatar?size=medium&avatarId=10324"
+        }
+      },
+      "fixVersions": [],
+      "aggregatetimespent": null,
+      "resolution": {
+        "self": "https://eiffelplugin.atlassian.net/rest/api/2/resolution/10000",
+        "id": "10000",
+        "description": "Work has been completed on this issue.",
+        "name": "Done"
+      },
+      "customfield_10027": null,
+      "customfield_10028": null,
+      "resolutiondate": "2018-03-05T11:13:41.363-0600",
+      "workratio": -1,
+      "watches": {
+        "self": "https://eiffelplugin.atlassian.net/rest/api/2/issue/TP-43/watchers",
+        "watchCount": 1,
+        "isWatching": true
+      },
+      "lastViewed": "2018-03-05T11:13:41.341-0600",
+      "created": "2018-03-04T21:45:06.500-0600",
+      "customfield_10022": null,
+      "customfield_10023": null,
+      "priority": {
+        "self": "https://eiffelplugin.atlassian.net/rest/api/2/priority/3",
+        "iconUrl": "https://eiffelplugin.atlassian.net/images/icons/priorities/medium.svg",
+        "name": "Medium",
+        "id": "3"
+      },
+      "customfield_10024": null,
+      "customfield_10025": null,
+      "labels": [],
+      "customfield_10026": null,
+      "customfield_10016": null,
+      "customfield_10017": null,
+      "customfield_10018": null,
+      "timeestimate": null,
+      "aggregatetimeoriginalestimate": null,
+      "versions": [],
+      "issuelinks": [],
+      "assignee": {
+        "self": "https://eiffelplugin.atlassian.net/rest/api/2/user?username=admin",
+        "name": "admin",
+        "key": "admin",
+        "accountId": "5a6d37576f1515570b9b0fc1",
+        "emailAddress": "bob@barker.com",
+        "avatarUrls": {
+          "48x48": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=48&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D48%26noRedirect%3Dtrue",
+          "24x24": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=24&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D24%26noRedirect%3Dtrue",
+          "16x16": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=16&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D16%26noRedirect%3Dtrue",
+          "32x32": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=32&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D32%26noRedirect%3Dtrue"
+        },
+        "displayName": "Bob Barker",
+        "active": true,
+        "timeZone": "America/Chicago"
+      },
+      "updated": "2018-03-05T11:13:41.367-0600",
+      "status": {
+        "self": "https://eiffelplugin.atlassian.net/rest/api/2/status/10001",
+        "description": "",
+        "iconUrl": "https://eiffelplugin.atlassian.net/",
+        "name": "Done",
+        "id": "10001",
+        "statusCategory": {
+          "self": "https://eiffelplugin.atlassian.net/rest/api/2/statuscategory/3",
+          "id": 3,
+          "key": "done",
+          "colorName": "green",
+          "name": "Complete"
+        }
+      },
+      "components": [],
+      "timeoriginalestimate": null,
+      "description": "Issue Description",
+      "customfield_10010": [
+        "com.atlassian.greenhopper.service.sprint.Sprint@520359d[id=1,rapidViewId=1,state=ACTIVE,name=Sample Sprint 2,goal=<null>,startDate=2018-01-20T17:38:33.365Z,endDate=2018-02-03T17:58:33.365Z,completeDate=<null>,sequence=1]"
+      ],
+      "customfield_10011": "1|i0003z:",
+      "customfield_10012": null,
+      "customfield_10013": "3_*:*_2_*:*_45584730_*|*_10000_*:*_2_*:*_2771298_*|*_10001_*:*_2_*:*_158843",
+      "customfield_10014": null,
+      "timetracking": {},
+      "customfield_10015": [],
+      "security": null,
+      "customfield_10008": "TP-33",
+      "aggregatetimeestimate": null,
+      "customfield_10009": null,
+      "attachment": [],
+      "summary": "Issue sumary",
+      "creator": {
+        "self": "https://eiffelplugin.atlassian.net/rest/api/2/user?username=admin",
+        "name": "admin",
+        "key": "admin",
+        "accountId": "5a6d37576f1515570b9b0fc1",
+        "emailAddress": "bob@barker.com",
+        "avatarUrls": {
+          "48x48": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=48&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D48%26noRedirect%3Dtrue",
+          "24x24": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=24&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D24%26noRedirect%3Dtrue",
+          "16x16": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=16&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D16%26noRedirect%3Dtrue",
+          "32x32": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=32&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D32%26noRedirect%3Dtrue"
+        },
+        "displayName": "Bob Barker",
+        "active": true,
+        "timeZone": "America/Chicago"
+      },
+      "subtasks": [],
+      "reporter": {
+        "self": "https://eiffelplugin.atlassian.net/rest/api/2/user?username=admin",
+        "name": "admin",
+        "key": "admin",
+        "accountId": "5a6d37576f1515570b9b0fc1",
+        "emailAddress": "bob@barker.com",
+        "avatarUrls": {
+          "48x48": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=48&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D48%26noRedirect%3Dtrue",
+          "24x24": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=24&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D24%26noRedirect%3Dtrue",
+          "16x16": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=16&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D16%26noRedirect%3Dtrue",
+          "32x32": "https://avatar-cdn.atlassian.com/051117824355069b45acbf61ebfb8544?s=32&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F051117824355069b45acbf61ebfb8544%3Fd%3Dmm%26s%3D32%26noRedirect%3Dtrue"
+        },
+        "displayName": "Bob Barker",
+        "active": true,
+        "timeZone": "America/Chicago"
+      },
+      "aggregateprogress": {
+        "progress": 0,
+        "total": 0
+      },
+      "customfield_10000": "{}",
+      "customfield_10001": null,
+      "customfield_10002": null,
+      "customfield_10003": null,
+      "customfield_10004": null,
+      "environment": null,
+      "duedate": null,
+      "progress": {
+        "progress": 0,
+        "total": 0
+      },
+      "votes": {
+        "self": "https://eiffelplugin.atlassian.net/rest/api/2/issue/TP-43/votes",
+        "votes": 0,
+        "hasVoted": false
+      }
+    }
+  },
+  "changelog": {
+    "id": "10100",
+    "items": [
+      {
+        "field": "resolution",
+        "fieldtype": "jira",
+        "fieldId": "resolution",
+        "from": null,
+        "fromString": null,
+        "to": "10000",
+        "toString": "Done"
+      },
+      {
+        "field": "status",
+        "fieldtype": "jira",
+        "fieldId": "status",
+        "from": "10000",
+        "fromString": "To Do",
+        "to": "10001",
+        "toString": "Done"
+      }
+    ]
+  }
+}
