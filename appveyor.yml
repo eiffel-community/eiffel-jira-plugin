@@ -10,9 +10,7 @@ environment:
 install:
   - gradlew.bat --version
 build_script:
-  - gradlew.bat -u -i clean assemble
-test_script:
-  - gradlew.bat -u -i -S check
+  - gradlew.bat -u -i clean build
 cache:
   - .gradle
   - C:\Users\appveyor\.gradle
