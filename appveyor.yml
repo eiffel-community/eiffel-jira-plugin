@@ -1,14 +1,22 @@
-version: 1.0.{build}.{branch}
+version: 0.0.{build}.{branch}
 pull_requests:
   do_not_increment_build_number: true
 clone_depth: 10
 environment:
   matrix:
   - JAVA_HOME: C:\Program Files\Java\jdk1.8.0
-install:
-  - gradlew.bat wrapper
-  - gradlew.bat dependencies
-build_script:
-  - gradlew.bat assemble
-test_script:
-  - gradlew.bat build
+ skip_tags: true
+ clone_depth: 10
+ environment:
+   TERM: dumb
+   matrix:
+     - JAVA_HOME: C:\Program Files\Java\jdk1.8.0
+ install:
+   - gradlew.bat --version
+ build_script:
+   - gradlew.bat -u -i clean assemble
+ test_script:
+   - gradlew.bat -u -i -S check
+ cache:
+   - .gradle
+   - C:\Users\appveyor\.gradle
