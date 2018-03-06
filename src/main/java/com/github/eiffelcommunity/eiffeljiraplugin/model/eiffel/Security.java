@@ -17,17 +17,13 @@
 
 package com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.github.eiffelcommunity.eiffeljiraplugin.annotations.EiffelStyleImmutable;
 import org.immutables.value.Value;
 
 import java.util.Optional;
 
 @Value.Immutable
-@JsonSerialize
-@JsonDeserialize
-@JsonInclude(JsonInclude.Include.NON_ABSENT)
+@EiffelStyleImmutable
 public interface Security {
-    Optional<Sdm> sdm();
+    Optional<ImmutableSdm> sdm();
 }

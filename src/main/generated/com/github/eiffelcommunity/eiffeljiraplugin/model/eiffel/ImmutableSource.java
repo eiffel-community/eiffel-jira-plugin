@@ -38,14 +38,14 @@ public final class ImmutableSource implements Source {
   private final String domainId;
   private final String host;
   private final String name;
-  private final Serializer serializer;
+  private final ImmutableSerializer serializer;
   private final URI uri;
 
   private ImmutableSource(
       String domainId,
       String host,
       String name,
-      Serializer serializer,
+      ImmutableSerializer serializer,
       URI uri) {
     this.domainId = domainId;
     this.host = host;
@@ -86,7 +86,7 @@ public final class ImmutableSource implements Source {
    */
   @JsonProperty("serializer")
   @Override
-  public Optional<Serializer> serializer() {
+  public Optional<ImmutableSerializer> serializer() {
     return Optional.ofNullable(serializer);
   }
 
@@ -173,8 +173,8 @@ public final class ImmutableSource implements Source {
    * @param value The value for serializer
    * @return A modified copy of {@code this} object
    */
-  public final ImmutableSource withSerializer(Serializer value) {
-    Serializer newValue = Objects.requireNonNull(value, "serializer");
+  public final ImmutableSource withSerializer(ImmutableSerializer value) {
+    ImmutableSerializer newValue = Objects.requireNonNull(value, "serializer");
     if (this.serializer == newValue) return this;
     return new ImmutableSource(this.domainId, this.host, this.name, newValue, this.uri);
   }
@@ -185,8 +185,8 @@ public final class ImmutableSource implements Source {
    * @param optional A value for serializer
    * @return A modified copy of {@code this} object
    */
-  public final ImmutableSource withSerializer(Optional<? extends Serializer> optional) {
-    Serializer value = optional.orElse(null);
+  public final ImmutableSource withSerializer(Optional<? extends ImmutableSerializer> optional) {
+    ImmutableSerializer value = optional.orElse(null);
     if (this.serializer == value) return this;
     return new ImmutableSource(this.domainId, this.host, this.name, value, this.uri);
   }
@@ -288,7 +288,7 @@ public final class ImmutableSource implements Source {
     Optional<String> domainId = Optional.empty();
     Optional<String> host = Optional.empty();
     Optional<String> name = Optional.empty();
-    Optional<Serializer> serializer = Optional.empty();
+    Optional<ImmutableSerializer> serializer = Optional.empty();
     Optional<URI> uri = Optional.empty();
     @JsonProperty("domainId")
     public void setDomainId(Optional<String> domainId) {
@@ -303,7 +303,7 @@ public final class ImmutableSource implements Source {
       this.name = name;
     }
     @JsonProperty("serializer")
-    public void setSerializer(Optional<Serializer> serializer) {
+    public void setSerializer(Optional<ImmutableSerializer> serializer) {
       this.serializer = serializer;
     }
     @JsonProperty("uri")
@@ -317,7 +317,7 @@ public final class ImmutableSource implements Source {
     @Override
     public Optional<String> name() { throw new UnsupportedOperationException(); }
     @Override
-    public Optional<Serializer> serializer() { throw new UnsupportedOperationException(); }
+    public Optional<ImmutableSerializer> serializer() { throw new UnsupportedOperationException(); }
     @Override
     public Optional<URI> uri() { throw new UnsupportedOperationException(); }
   }
@@ -384,7 +384,7 @@ public final class ImmutableSource implements Source {
     private String domainId;
     private String host;
     private String name;
-    private Serializer serializer;
+    private ImmutableSerializer serializer;
     private URI uri;
 
     private Builder() {
@@ -411,7 +411,7 @@ public final class ImmutableSource implements Source {
       if (nameOptional.isPresent()) {
         name(nameOptional);
       }
-      Optional<Serializer> serializerOptional = instance.serializer();
+      Optional<ImmutableSerializer> serializerOptional = instance.serializer();
       if (serializerOptional.isPresent()) {
         serializer(serializerOptional);
       }
@@ -490,7 +490,7 @@ public final class ImmutableSource implements Source {
      * @param serializer The value for serializer
      * @return {@code this} builder for chained invocation
      */
-    public final Builder serializer(Serializer serializer) {
+    public final Builder serializer(ImmutableSerializer serializer) {
       this.serializer = Objects.requireNonNull(serializer, "serializer");
       return this;
     }
@@ -501,7 +501,7 @@ public final class ImmutableSource implements Source {
      * @return {@code this} builder for use in a chained invocation
      */
     @JsonProperty("serializer")
-    public final Builder serializer(Optional<? extends Serializer> serializer) {
+    public final Builder serializer(Optional<? extends ImmutableSerializer> serializer) {
       this.serializer = serializer.orElse(null);
       return this;
     }

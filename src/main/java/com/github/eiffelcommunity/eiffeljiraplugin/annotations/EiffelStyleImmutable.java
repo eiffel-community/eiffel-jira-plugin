@@ -15,19 +15,18 @@
  * limitations under the License.
  */
 
-package com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
+package com.github.eiffelcommunity.eiffeljiraplugin.annotations;
 
-import com.github.eiffelcommunity.eiffeljiraplugin.annotations.EiffelStyleImmutable;
-import org.immutables.value.Value;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-@Value.Immutable
-@EiffelStyleImmutable
-public interface Assignee {
-    String name();
-
-    String email();
-
-    String id();
-
-    String group();
+/*
+    Jackson JsonInclude(Include = INCLUDE.NON_ABSENT ) SHOULD make it so that empty Optional
+    fields are totally ignored when serializing, but instead they keep getting serialized as
+    null. Giving up for now, we can go with all fields being present during serialization but
+    possibly nullable.
+ */
+@JsonSerialize
+@JsonDeserialize
+public @interface EiffelStyleImmutable {
 }

@@ -35,9 +35,9 @@ import javax.annotation.Generated;
 @Generated({"Immutables.generator", "Security"})
 public final class ImmutableSecurity
     implements Security {
-  private final Sdm sdm;
+  private final ImmutableSdm sdm;
 
-  private ImmutableSecurity(Sdm sdm) {
+  private ImmutableSecurity(ImmutableSdm sdm) {
     this.sdm = sdm;
   }
 
@@ -46,7 +46,7 @@ public final class ImmutableSecurity
    */
   @JsonProperty("sdm")
   @Override
-  public Optional<Sdm> sdm() {
+  public Optional<ImmutableSdm> sdm() {
     return Optional.ofNullable(sdm);
   }
 
@@ -55,8 +55,8 @@ public final class ImmutableSecurity
    * @param value The value for sdm
    * @return A modified copy of {@code this} object
    */
-  public final ImmutableSecurity withSdm(Sdm value) {
-    Sdm newValue = Objects.requireNonNull(value, "sdm");
+  public final ImmutableSecurity withSdm(ImmutableSdm value) {
+    ImmutableSdm newValue = Objects.requireNonNull(value, "sdm");
     if (this.sdm == newValue) return this;
     return new ImmutableSecurity(newValue);
   }
@@ -67,8 +67,8 @@ public final class ImmutableSecurity
    * @param optional A value for sdm
    * @return A modified copy of {@code this} object
    */
-  public final ImmutableSecurity withSdm(Optional<? extends Sdm> optional) {
-    Sdm value = optional.orElse(null);
+  public final ImmutableSecurity withSdm(Optional<? extends ImmutableSdm> optional) {
+    ImmutableSdm value = optional.orElse(null);
     if (this.sdm == value) return this;
     return new ImmutableSecurity(value);
   }
@@ -120,13 +120,13 @@ public final class ImmutableSecurity
   @JsonDeserialize
   @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.NONE)
   static final class Json implements Security {
-    Optional<Sdm> sdm = Optional.empty();
+    Optional<ImmutableSdm> sdm = Optional.empty();
     @JsonProperty("sdm")
-    public void setSdm(Optional<Sdm> sdm) {
+    public void setSdm(Optional<ImmutableSdm> sdm) {
       this.sdm = sdm;
     }
     @Override
-    public Optional<Sdm> sdm() { throw new UnsupportedOperationException(); }
+    public Optional<ImmutableSdm> sdm() { throw new UnsupportedOperationException(); }
   }
 
   /**
@@ -176,7 +176,7 @@ public final class ImmutableSecurity
    * but instead used immediately to create instances.</em>
    */
   public static final class Builder {
-    private Sdm sdm;
+    private ImmutableSdm sdm;
 
     private Builder() {
     }
@@ -190,7 +190,7 @@ public final class ImmutableSecurity
      */
     public final Builder from(Security instance) {
       Objects.requireNonNull(instance, "instance");
-      Optional<Sdm> sdmOptional = instance.sdm();
+      Optional<ImmutableSdm> sdmOptional = instance.sdm();
       if (sdmOptional.isPresent()) {
         sdm(sdmOptional);
       }
@@ -202,7 +202,7 @@ public final class ImmutableSecurity
      * @param sdm The value for sdm
      * @return {@code this} builder for chained invocation
      */
-    public final Builder sdm(Sdm sdm) {
+    public final Builder sdm(ImmutableSdm sdm) {
       this.sdm = Objects.requireNonNull(sdm, "sdm");
       return this;
     }
@@ -213,7 +213,7 @@ public final class ImmutableSecurity
      * @return {@code this} builder for use in a chained invocation
      */
     @JsonProperty("sdm")
-    public final Builder sdm(Optional<? extends Sdm> sdm) {
+    public final Builder sdm(Optional<? extends ImmutableSdm> sdm) {
       this.sdm = sdm.orElse(null);
       return this;
     }

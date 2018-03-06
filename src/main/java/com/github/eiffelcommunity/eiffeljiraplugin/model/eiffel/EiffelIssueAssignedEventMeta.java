@@ -17,8 +17,7 @@
 
 package com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.github.eiffelcommunity.eiffeljiraplugin.annotations.EiffelStyleImmutable;
 import org.immutables.value.Value;
 
 import java.util.List;
@@ -26,8 +25,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Value.Immutable
-@JsonSerialize
-@JsonDeserialize
+@EiffelStyleImmutable
 public interface EiffelIssueAssignedEventMeta {
     @Value.Default
     default UUID id() {

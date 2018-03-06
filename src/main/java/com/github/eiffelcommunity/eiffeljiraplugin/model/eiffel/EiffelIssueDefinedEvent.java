@@ -17,18 +17,14 @@
 
 package com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.github.eiffelcommunity.eiffeljiraplugin.annotations.EiffelStyleImmutable;
 import org.immutables.value.Value;
 
 import java.util.List;
 
 @Value.Immutable
-@JsonSerialize
-@JsonDeserialize
+@EiffelStyleImmutable
 public interface EiffelIssueDefinedEvent {
-    @JsonInclude(content = JsonInclude.Include.NON_ABSENT)
     ImmutableEiffelIssueDefinedEventMeta meta();
 
     ImmutableEiffelIssueDefinedEventData data();

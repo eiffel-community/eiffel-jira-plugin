@@ -17,16 +17,26 @@
 
 package com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Optional;
+
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 
 public class EiffelIssueDefinedEventTest {
 
+    private ObjectMapper mapper;
     @Before
     public void setUp() throws Exception {
+        mapper = new ObjectMapper();
+        mapper.registerModule(new Jdk8Module());
     }
 
     @After
@@ -38,5 +48,16 @@ public class EiffelIssueDefinedEventTest {
         ImmutableEiffelIssueDefinedEventMeta meta = ImmutableEiffelIssueDefinedEventMeta.builder().build();
         assertFalse(meta.source().isPresent());
         assertFalse(meta.tags().isPresent());
+    }
+
+    @Test
+    public void jacksonSerializesEmptyOptionalsAsNull() throws Exception {
+        ImmutableEiffelIssueDefinedEvent event = ImmutableEiffelIssueDefinedEvent.builder()
+                .meta(ImmutableEiffelIssueDefinedEventMeta.builder().source(Optional.empty()).build())
+                .data(mock(ImmutableEiffelIssueDefinedEventData.class))
+                .build();
+        String json = mapper.writeValueAsString(event);
+        JsonNode root = mapper.readTree(json);
+        assertTrue(root.path("meta").path("source").isNull());
     }
 }

@@ -19,7 +19,6 @@ package com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.ArrayList;
@@ -57,7 +56,6 @@ public final class ImmutableEiffelIssueDefinedEvent
    * @return The value of the {@code meta} attribute
    */
   @JsonProperty("meta")
-  @JsonInclude(content = JsonInclude.Include.NON_ABSENT)
   @Override
   public ImmutableEiffelIssueDefinedEventMeta meta() {
     return meta;
@@ -183,7 +181,6 @@ public final class ImmutableEiffelIssueDefinedEvent
     ImmutableEiffelIssueDefinedEventData data;
     List<ImmutableLink> links = Collections.emptyList();
     @JsonProperty("meta")
-    @JsonInclude(content = JsonInclude.Include.NON_ABSENT)
     public void setMeta(ImmutableEiffelIssueDefinedEventMeta meta) {
       this.meta = meta;
     }
@@ -289,7 +286,6 @@ public final class ImmutableEiffelIssueDefinedEvent
      * @return {@code this} builder for use in a chained invocation
      */
     @JsonProperty("meta")
-    @JsonInclude(content = JsonInclude.Include.NON_ABSENT)
     public final Builder meta(ImmutableEiffelIssueDefinedEventMeta meta) {
       this.meta = Objects.requireNonNull(meta, "meta");
       initBits &= ~INIT_BIT_META;
