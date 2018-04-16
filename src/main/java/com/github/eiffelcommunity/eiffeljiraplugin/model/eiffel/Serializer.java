@@ -25,7 +25,7 @@ import org.immutables.value.Value;
 public interface Serializer {
     String groupId();
 
-    String artifcatId();
+    String artifactId();
 
     String version();
 }
