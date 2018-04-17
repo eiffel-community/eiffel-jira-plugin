@@ -35,7 +35,8 @@ public class JiraEiffelMappingServiceImpl implements JiraEiffelMappingService {
     public ImmutableEiffelIssueDefinedEvent toEiffelIssueDefinedEvent(ImmutableJiraIssueRelatedEvent jiraEvent) {
         ImmutableJiraIssue jiraIssue = jiraEvent.issue();
 
-        ImmutableEiffelIssueDefinedEventMeta meta = ImmutableEiffelIssueDefinedEventMeta.builder().build();
+        ImmutableEiffelIssueDefinedEventMeta meta = ImmutableEiffelIssueDefinedEventMeta.builder()
+                .time(jiraEvent.timestamp()).build();
 
         ImmutableEiffelIssueDefinedEventData data = ImmutableEiffelIssueDefinedEventData.builder()
                 .id(jiraIssue.id())

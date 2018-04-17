@@ -81,7 +81,9 @@ public class JiraEiffelMappingServiceImplTest {
     @Test
     public void toEiffelIssueDefinedEventWithGoodInput() throws Exception {
         ImmutableEiffelIssueDefinedEvent expected = ImmutableEiffelIssueDefinedEvent.builder()
-                .meta(ImmutableEiffelIssueDefinedEventMeta.builder().build())
+                .meta(ImmutableEiffelIssueDefinedEventMeta.builder()
+                        .time(1517840805048L)
+                        .build())
                 .data(ImmutableEiffelIssueDefinedEventData.builder()
                         .tracker("JIRA")
                         .type(EiffelIssueType.OTHER)
@@ -92,6 +94,7 @@ public class JiraEiffelMappingServiceImplTest {
                 .build();
         ImmutableJiraIssueRelatedEvent jiraEvent = mapper.readValue(jiraIssueCreatedEventString, ImmutableJiraIssueRelatedEvent.class);
         ImmutableEiffelIssueDefinedEvent actual = jiraEiffelMappingService.toEiffelIssueDefinedEvent(jiraEvent);
+        assertThat(actual.meta().time(), is(equalTo(expected.meta().time())));
         assertThat(actual.data(), is(equalTo(expected.data())));
     }
 

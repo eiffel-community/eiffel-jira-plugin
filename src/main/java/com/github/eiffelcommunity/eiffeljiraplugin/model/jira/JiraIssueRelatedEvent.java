@@ -34,6 +34,8 @@ public interface JiraIssueRelatedEvent {
     @JsonProperty("issue_event_type_name")
     String issueEventType();
 
+    long timestamp();
+
     ImmutableJiraIssue issue();
 
 }
