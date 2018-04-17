@@ -19,11 +19,14 @@ package com.github.eiffelcommunity.eiffeljiraplugin.service;
 
 import com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.EiffelIssueType;
 import com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.ImmutableEiffelIssueDefinedEvent;
-import com.github.eiffelcommunity.eiffeljiraplugin.model.jira.ImmutableJiraIssue;
+import com.github.eiffelcommunity.eiffeljiraplugin.model.jira.ImmutableJiraIssueRelatedEvent;
 import com.github.eiffelcommunity.eiffeljiraplugin.model.jira.JiraIssueType;
 
+/*
+    Service for mapping JIRA events to Eiffel events.
+ */
 public interface JiraEiffelMappingService {
-    ImmutableEiffelIssueDefinedEvent toEiffelIssueDefinedEvent(ImmutableJiraIssue jiraIssue);
+    ImmutableEiffelIssueDefinedEvent toEiffelIssueDefinedEvent(ImmutableJiraIssueRelatedEvent jiraEvent);
 
     EiffelIssueType toEiffelIssueType(JiraIssueType jiraType);
 }
