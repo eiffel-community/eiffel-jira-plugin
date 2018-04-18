@@ -24,6 +24,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.net.URI;
 import java.util.Optional;
 
 import static org.junit.Assert.assertFalse;
@@ -34,13 +35,13 @@ public class EiffelIssueDefinedEventTest {
 
     private ObjectMapper mapper;
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         mapper = new ObjectMapper();
         mapper.registerModule(new Jdk8Module());
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
     }
 
     @Test
@@ -54,7 +55,12 @@ public class EiffelIssueDefinedEventTest {
     public void jacksonSerializesEmptyOptionalsAsNull() throws Exception {
         ImmutableEiffelIssueDefinedEvent event = ImmutableEiffelIssueDefinedEvent.builder()
                 .meta(ImmutableEiffelIssueDefinedEventMeta.builder().source(Optional.empty()).build())
-                .data(mock(ImmutableEiffelIssueDefinedEventData.class))
+                .data(ImmutableEiffelIssueDefinedEventData.builder()
+                        .id("wish")
+                        .tracker("you could mock")
+                        .type(EiffelIssueType.OTHER)
+                        .uri(URI.create("https://final-class.com"))
+                        .build())
                 .build();
         String json = mapper.writeValueAsString(event);
         JsonNode root = mapper.readTree(json);
