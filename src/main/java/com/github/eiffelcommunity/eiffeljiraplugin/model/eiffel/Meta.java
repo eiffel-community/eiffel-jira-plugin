@@ -17,18 +17,8 @@
 
 package com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
 
-import com.github.eiffelcommunity.eiffeljiraplugin.annotations.EiffelStyleImmutable;
-import org.immutables.value.Value;
+public interface Meta {
+    String type();
 
-import java.util.List;
-
-@Value.Immutable
-@EiffelStyleImmutable
-public interface EiffelIssueDefinedEvent extends Event {
-    ImmutableEiffelIssueDefinedEventMeta meta();
-
-    ImmutableEiffelIssueDefinedEventData data();
-
-    // TODO: Validate link types
-    List<ImmutableLink> links();
+    String version();
 }
