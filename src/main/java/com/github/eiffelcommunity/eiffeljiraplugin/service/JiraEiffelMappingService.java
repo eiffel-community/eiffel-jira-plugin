@@ -29,4 +29,5 @@ public interface JiraEiffelMappingService {
     ImmutableEiffelIssueDefinedEvent toEiffelIssueDefinedEvent(ImmutableJiraIssueRelatedEvent jiraEvent);
 
     EiffelIssueType toEiffelIssueType(JiraIssueType jiraType);
+
 }

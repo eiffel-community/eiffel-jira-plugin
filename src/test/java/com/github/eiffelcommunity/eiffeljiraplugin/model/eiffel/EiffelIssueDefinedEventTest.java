@@ -19,30 +19,25 @@ package com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.URI;
 import java.util.Optional;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
+import static org.junit.Assert.assertThat;
 
+@SpringBootTest
+@RunWith(SpringRunner.class)
 public class EiffelIssueDefinedEventTest {
 
+    @Autowired
     private ObjectMapper mapper;
-    @Before
-    public void setUp() {
-        mapper = new ObjectMapper();
-        mapper.registerModule(new Jdk8Module());
-    }
-
-    @After
-    public void tearDown() {
-    }
 
     @Test
     public void defaultMetaHasEmptyOptionalFields() {
@@ -52,7 +47,7 @@ public class EiffelIssueDefinedEventTest {
     }
 
     @Test
-    public void jacksonSerializesEmptyOptionalsAsNull() throws Exception {
+    public void jacksonOmitsEmptyOptionalsEntirely() throws Exception {
         ImmutableEiffelIssueDefinedEvent event = ImmutableEiffelIssueDefinedEvent.builder()
                 .meta(ImmutableEiffelIssueDefinedEventMeta.builder().source(Optional.empty()).build())
                 .data(ImmutableEiffelIssueDefinedEventData.builder()
@@ -64,6 +59,7 @@ public class EiffelIssueDefinedEventTest {
                 .build();
         String json = mapper.writeValueAsString(event);
         JsonNode root = mapper.readTree(json);
-        assertTrue(root.path("meta").path("source").isNull());
+        assertThat(root.path("meta").has("source"), is(false));
+        assertThat(root.path("meta").has("tags"), is(false));
     }
 }
