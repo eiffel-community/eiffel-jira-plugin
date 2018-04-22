@@ -18,9 +18,9 @@
 package com.github.eiffelcommunity.eiffeljiraplugin.controller;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.ImmutableEiffelIssueDefinedEvent;
 import com.github.eiffelcommunity.eiffeljiraplugin.model.jira.ImmutableJiraIssueRelatedEvent;
+import com.github.eiffelcommunity.eiffeljiraplugin.service.EiffelRabbitService;
 import com.github.eiffelcommunity.eiffeljiraplugin.service.JiraEiffelMappingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,13 +35,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class JiraWebhookController {
     private static final Logger LOG = LoggerFactory.getLogger(JiraWebhookController.class);
-    private JiraEiffelMappingService mappingService;
-    private ObjectMapper mapper;
+
+    private final JiraEiffelMappingService mappingService;
+    private final EiffelRabbitService rabbitService;
 
     @Autowired
-    public JiraWebhookController(JiraEiffelMappingService mappingService, ObjectMapper mapper) {
+    public JiraWebhookController(JiraEiffelMappingService mappingService, EiffelRabbitService rabbitService) {
         this.mappingService = mappingService;
-        this.mapper = mapper;
+        this.rabbitService = rabbitService;
     }
 
     @RequestMapping(value = "/webhooks/jira", method = {RequestMethod.POST})
@@ -52,13 +53,11 @@ public class JiraWebhookController {
         switch (jiraEvent.webhookEventType()) {
             case CREATED:
                 ImmutableEiffelIssueDefinedEvent eiffelEvent = mappingService.toEiffelIssueDefinedEvent(jiraEvent);
-                // TODO: Send Eiffel event to Rabbit
                 try {
-                    String json = mapper.writeValueAsString(eiffelEvent);
-                    LOG.info("Parsed event to json: " + json);
+                    rabbitService.publish(eiffelEvent);
                     return ResponseEntity.ok().build();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LOG.error(e.getMessage());
                     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
                 }
             default:

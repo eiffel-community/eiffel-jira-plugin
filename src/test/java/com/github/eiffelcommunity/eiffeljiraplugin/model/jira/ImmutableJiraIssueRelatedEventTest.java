@@ -19,41 +19,25 @@ package com.github.eiffelcommunity.eiffeljiraplugin.model.jira;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-import org.junit.*;
+import com.github.eiffelcommunity.eiffeljiraplugin.SharedTestConstants;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
-import java.io.InputStream;
 import java.net.URI;
-import java.util.Scanner;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class ImmutableJiraIssueRelatedEventTest {
-    private static String jiraIssueCreatedEventString;
-    private static String jiraIssueAssignedEventString;
-    private static String jiraIssueStatusUpdatedToInProgressEventString;
-    private static String jiraIssueStatusUpdatedToCompleteEventString;
+    private static String jiraIssueCreatedEventString = SharedTestConstants.jiraIssueCreatedEventString;
+    private static String jiraIssueAssignedEventString = SharedTestConstants.jiraIssueAssignedEventString;
+    private static String jiraIssueStatusUpdatedToInProgressEventString = SharedTestConstants.jiraIssueStatusUpdatedToInProgressEventString;
+    private static String jiraIssueStatusUpdatedToCompleteEventString = SharedTestConstants.jiraIssueStatusUpdatedToCompleteEventString;
 
     private ObjectMapper mapper;
-
-    /*
-     read in a file under "resources" and return the whole thing as a string
-     See https://stackoverflow.com/questions/309424/read-convert-an-inputstream-to-a-string
-     for scanner trick. "\\A" is "beginning of input boundry," so the scanner reads
-     the whole file in one go.
-    */
-    private static String resourceToString(String resourcePath) {
-        InputStream inputStream = ImmutableJiraIssueRelatedEventTest.class.getClassLoader().getResourceAsStream(resourcePath);
-        try (Scanner s = new Scanner(inputStream).useDelimiter("\\A")) {
-            return s.hasNext() ? s.next() : "";
-        }
-    }
-
-    @BeforeClass
-    public static void initCache() {
-        // read files only once, not before each test
-        jiraIssueCreatedEventString = resourceToString("input/jira-issue-created.json");
-        jiraIssueAssignedEventString = resourceToString("input/jira-issue-assigned.json");
-        jiraIssueStatusUpdatedToInProgressEventString = resourceToString("input/jira-issue-status-updated-to-in-progress.json");
-        jiraIssueStatusUpdatedToCompleteEventString = resourceToString("input/jira-issue-status-updated-to-complete.json");
-    }
 
     @Before
     public void setUp() {
@@ -97,7 +81,7 @@ public class ImmutableJiraIssueRelatedEventTest {
 
         ImmutableJiraIssueRelatedEvent actual = mapper.readValue(jiraIssueCreatedEventString, ImmutableJiraIssueRelatedEvent.class);
 
-        Assert.assertEquals(expected, actual);
+        assertThat(actual, is(equalTo(expected)));
     }
 
     @Test

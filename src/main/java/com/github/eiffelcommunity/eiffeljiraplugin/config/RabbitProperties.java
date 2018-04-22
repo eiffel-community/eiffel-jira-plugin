@@ -15,20 +15,24 @@
  * limitations under the License.
  */
 
-package com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
+package com.github.eiffelcommunity.eiffeljiraplugin.config;
 
-import com.github.eiffelcommunity.eiffeljiraplugin.annotations.EiffelStyleImmutable;
-import org.immutables.value.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
-import java.util.List;
+@Component
+@ConfigurationProperties(prefix = "app.rabbitmq")
+public class RabbitProperties {
+    /**
+     * Name of exchange to publish Eiffel events to
+     */
+    private String exchangeName = "eiffel";
 
-@Value.Immutable
-@EiffelStyleImmutable
-public interface EiffelIssueDefinedEvent extends Event {
-    ImmutableEiffelIssueDefinedEventMeta meta();
+    public String getExchangeName() {
+        return exchangeName;
+    }
 
-    ImmutableEiffelIssueDefinedEventData data();
-
-    // TODO: Validate link types
-    List<ImmutableLink> links();
+    public void setExchangeName(String exchangeName) {
+        this.exchangeName = exchangeName;
+    }
 }

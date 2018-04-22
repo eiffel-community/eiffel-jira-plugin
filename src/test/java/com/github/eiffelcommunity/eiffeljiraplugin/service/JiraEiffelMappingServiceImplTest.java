@@ -18,7 +18,7 @@
 package com.github.eiffelcommunity.eiffeljiraplugin.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.github.eiffelcommunity.eiffeljiraplugin.SharedTestConstants;
 import com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.EiffelIssueType;
 import com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.ImmutableEiffelIssueDefinedEvent;
 import com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.ImmutableEiffelIssueDefinedEventData;
@@ -26,53 +26,30 @@ import com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.ImmutableEiffelI
 import com.github.eiffelcommunity.eiffeljiraplugin.model.jira.ImmutableJiraIssueRelatedEvent;
 import com.github.eiffelcommunity.eiffeljiraplugin.model.jira.JiraIssueType;
 import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.InputStream;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class JiraEiffelMappingServiceImplTest {
 
-    private static String jiraIssueCreatedEventString;
+    private final static String jiraIssueCreatedEventString = SharedTestConstants.jiraIssueCreatedEventString;
 
-    private JiraEiffelMappingService jiraEiffelMappingService;
+    @Autowired
     private ObjectMapper mapper;
 
-    /*
-     read in a file under "resources" and return the whole thing as a string
-     See https://stackoverflow.com/questions/309424/read-convert-an-inputstream-to-a-string
-     for scanner trick. "\\A" is "beginning of input boundry," so the scanner reads
-     the whole file in one go.
-    */
-    private static String resourceToString(String resourcePath) {
-        InputStream inputStream = JiraEiffelMappingServiceImplTest.class.getClassLoader().getResourceAsStream(resourcePath);
-        try (Scanner s = new Scanner(inputStream).useDelimiter("\\A")) {
-            return s.hasNext() ? s.next() : "";
-        }
-    }
-
-    @BeforeClass
-    public static void initCache() {
-        jiraIssueCreatedEventString = resourceToString("input/jira-issue-created.json");
-    }
-
-    @Before
-    public void setUp() {
-        jiraEiffelMappingService = new JiraEiffelMappingServiceImpl();
-        mapper = new ObjectMapper();
-        /*
-            Spring automatically registers Jdk 8 types since jackson-datatype-jdk8 is on the class path,
-            but we don't want to bring in all of spring just for these tests.
-         */
-        mapper.registerModule(new Jdk8Module());
-    }
+    @Autowired
+    private JiraEiffelMappingService jiraEiffelMappingService;
 
     @After
     public void tearDown() {

@@ -26,7 +26,7 @@ import java.util.UUID;
 
 @Value.Immutable
 @EiffelStyleImmutable
-public interface EiffelIssueDefinedEventMeta {
+public interface EiffelIssueDefinedEventMeta extends Meta {
     @Value.Default
     default UUID id() {
         return UUID.randomUUID();

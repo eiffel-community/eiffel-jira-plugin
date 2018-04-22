@@ -17,13 +17,9 @@
 
 package com.github.eiffelcommunity.eiffeljiraplugin.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-import com.github.eiffelcommunity.eiffeljiraplugin.model.jira.ImmutableJiraIssueRelatedEventTest;
+import com.github.eiffelcommunity.eiffeljiraplugin.SharedTestConstants;
+import com.github.eiffelcommunity.eiffeljiraplugin.service.EiffelRabbitService;
 import com.github.eiffelcommunity.eiffeljiraplugin.service.JiraEiffelMappingService;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,50 +29,24 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.io.InputStream;
-import java.util.Scanner;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import static org.junit.Assert.*;
-
 @RunWith(SpringRunner.class)
 @WebMvcTest(JiraWebhookController.class)
 public class JiraWebhookControllerTest {
-    private static String jiraIssueCreatedEventString;
-    private static String jiraIssueAssignedEventString;
-    private static String jiraIssueStatusUpdatedToInProgressEventString;
-    private static String jiraIssueStatusUpdatedToCompleteEventString;
-
-    /*
-     read in a file under "resources" and return the whole thing as a string
-     See https://stackoverflow.com/questions/309424/read-convert-an-inputstream-to-a-string
-     for scanner trick. "\\A" is "beginning of input boundry," so the scanner reads
-     the whole file in one go.
-    */
-    private static String resourceToString(String resourcePath) {
-        InputStream inputStream = JiraWebhookControllerTest.class.getClassLoader().getResourceAsStream(resourcePath);
-        try (Scanner s = new Scanner(inputStream).useDelimiter("\\A")) {
-            return s.hasNext() ? s.next() : "";
-        }
-    }
-
-    @BeforeClass
-    public static void initCache() {
-        // read files only once, not before each test
-        jiraIssueCreatedEventString = resourceToString("input/jira-issue-created.json");
-        jiraIssueAssignedEventString = resourceToString("input/jira-issue-assigned.json");
-        jiraIssueStatusUpdatedToInProgressEventString = resourceToString("input/jira-issue-status-updated-to-in-progress.json");
-        jiraIssueStatusUpdatedToCompleteEventString = resourceToString("input/jira-issue-status-updated-to-complete.json");
-    }
+    private static String jiraIssueCreatedEventString = SharedTestConstants.jiraIssueCreatedEventString;
 
     @MockBean
     private JiraEiffelMappingService mappingService;
 
+    @MockBean
+    private EiffelRabbitService rabbitService;
+
     @Autowired
     private MockMvc mockMvc;
+
 
     @Test
     public void getRequestIsNotAllowed() throws Exception {

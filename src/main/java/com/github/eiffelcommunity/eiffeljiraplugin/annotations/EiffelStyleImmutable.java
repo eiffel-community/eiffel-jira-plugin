@@ -17,16 +17,23 @@
 
 package com.github.eiffelcommunity.eiffeljiraplugin.annotations;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.immutables.value.Value;
+
 
 /*
-    Jackson JsonInclude(Include = INCLUDE.NON_ABSENT ) SHOULD make it so that empty Optional
-    fields are totally ignored when serializing, but instead they keep getting serialized as
-    null. Giving up for now, we can go with all fields being present during serialization but
-    possibly nullable.
+    Having @JsonInclude(JsonInclude.Include.NON_ABSENT) should make jackson ignore
+    absent fields, but it doesn't. Even manually specifying on the generated implementation
+    class, jackson still ignores the annotation. In this application we're relying on configuring
+    the ObjectMapper directly to ignore absent fields.
  */
 @JsonSerialize
 @JsonDeserialize
+@Value.Style(
+        additionalJsonAnnotations = {JsonInclude.class}
+)
+@JsonInclude(JsonInclude.Include.NON_ABSENT)
 public @interface EiffelStyleImmutable {
 }
