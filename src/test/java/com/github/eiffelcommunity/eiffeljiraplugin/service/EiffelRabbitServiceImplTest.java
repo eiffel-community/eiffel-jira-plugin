@@ -21,6 +21,7 @@ import com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.EiffelIssueType;
 import com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.ImmutableEiffelIssueDefinedEvent;
 import com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.ImmutableEiffelIssueDefinedEventData;
 import com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.ImmutableEiffelIssueDefinedEventMeta;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -42,6 +43,7 @@ public class EiffelRabbitServiceImplTest {
     private RabbitTemplate rabbitTemplate;
 
     @Test
+    @Ignore
     public void publishSimpleString() {
         rabbitTemplate.convertAndSend("eiffel.issue.created", "straight from rabbit template");
     }
@@ -52,6 +54,7 @@ public class EiffelRabbitServiceImplTest {
      * a live broker.
      */
     @Test
+    @Ignore
     public void publishToLiveBroker() {
         ImmutableEiffelIssueDefinedEventMeta meta = ImmutableEiffelIssueDefinedEventMeta.builder().build();
         ImmutableEiffelIssueDefinedEventData data = ImmutableEiffelIssueDefinedEventData.builder()
