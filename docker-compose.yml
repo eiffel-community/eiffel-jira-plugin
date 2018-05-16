@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  rabbit:
+    restart: always
+    image: 'rabbitmq:3.7.4-management'
+    ports:
+      - "15672:15672"
+    networks:
+      default:
+          aliases:
+            - rabbit
+
+  jira-plugin:
+    restart: always
+    image: eiffel-community/eiffel-jira-plugin:0.0.1-SNAPSHOT
+    environment:
+      spring.rabbitmq.host: rabbit
+      spring.rabbitmq.username: guest
+      spring.rabbitmq.password: guest
+      app.rabbitmq.exchange-name: eiffel
+    ports:
+      - "8080:8080"
+    networks:
+      default:
+        aliases:
+          - jira-plugin

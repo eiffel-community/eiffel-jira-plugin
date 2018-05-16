@@ -18,14 +18,45 @@
 package com.github.eiffelcommunity.eiffeljiraplugin.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.amqp.core.Exchange;
+import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitConfig {
+
+    @Autowired
+    private RabbitProperties rabbitProperties;
+
+    @Bean
+    ConnectionFactory connectionFactory() {
+        CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
+        connectionFactory.setHost(rabbitProperties.getHost());
+        connectionFactory.setUsername(rabbitProperties.getUsername());
+        connectionFactory.setPassword(rabbitProperties.getPassword());
+        connectionFactory.setPort(rabbitProperties.getPort());
+        connectionFactory.setVirtualHost(rabbitProperties.getVirtualHost());
+        return connectionFactory;
+    }
+
+    @Bean
+    Exchange exchange() {
+        return new TopicExchange(rabbitProperties.getExchangeName());
+    }
+
+    @Bean
+    RabbitAdmin rabbitAdmin(final ConnectionFactory connectionFactory, final Exchange exchange) {
+        RabbitAdmin rabbitAdmin = new RabbitAdmin(connectionFactory);
+        rabbitAdmin.declareExchange(exchange);
+        return rabbitAdmin;
+    }
 
     /**
      * Taking the ObjectMapper as a parameter because Jackson2JsonMessageConverter uses
@@ -35,8 +66,9 @@ public class RabbitConfig {
      * default ObjectMapper that spring boot uses.
      */
     @Bean
-    RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory, final ObjectMapper objectMapper) {
+    RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory, final ObjectMapper objectMapper, final RabbitProperties rabbitProperties) {
         RabbitTemplate rabbitTemplate = new RabbitTemplate();
+        rabbitTemplate.setExchange(rabbitProperties.getExchangeName());
         rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter(objectMapper));
         rabbitTemplate.setConnectionFactory(connectionFactory);
         return rabbitTemplate;
