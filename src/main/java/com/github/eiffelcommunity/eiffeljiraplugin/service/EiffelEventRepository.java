@@ -15,24 +15,15 @@
  * limitations under the License.
  */
 
-package com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
+package com.github.eiffelcommunity.eiffeljiraplugin.service;
 
-import com.github.eiffelcommunity.eiffeljiraplugin.annotations.EiffelStyleImmutable;
-import org.immutables.value.Value;
+import com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.EiffelIssueDefinedEvent;
 
 import java.net.URI;
-import java.util.Optional;
+import java.util.UUID;
 
-@Value.Immutable
-@EiffelStyleImmutable
-public interface EiffelIssueDefinedEventData {
-    EiffelIssueType type();
+public interface EiffelEventRepository {
+    void saveIssueDefinedEvent(EiffelIssueDefinedEvent event);
 
-    String tracker();
-
-    URI uri();
-
-    String id();
-
-    Optional<String> title();
+    UUID getIssueDefinedEventID(URI uri);
 }

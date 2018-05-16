@@ -17,9 +17,10 @@
 
 package com.github.eiffelcommunity.eiffeljiraplugin.service;
 
-import com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.EiffelIssueType;
-import com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.ImmutableEiffelIssueDefinedEvent;
+import com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.*;
+import com.github.eiffelcommunity.eiffeljiraplugin.model.jira.ImmutableJiraAssignee;
 import com.github.eiffelcommunity.eiffeljiraplugin.model.jira.ImmutableJiraIssueRelatedEvent;
+import com.github.eiffelcommunity.eiffeljiraplugin.model.jira.JiraIssueStatusCategoryName;
 import com.github.eiffelcommunity.eiffeljiraplugin.model.jira.JiraIssueType;
 
 /*
@@ -28,6 +29,13 @@ import com.github.eiffelcommunity.eiffeljiraplugin.model.jira.JiraIssueType;
 public interface JiraEiffelMappingService {
     ImmutableEiffelIssueDefinedEvent toEiffelIssueDefinedEvent(ImmutableJiraIssueRelatedEvent jiraEvent);
 
+    ImmutableEiffelIssueAssignedEvent toEiffelIssueAssignedEvent(ImmutableJiraIssueRelatedEvent jiraEvent);
+
+    ImmutableEiffelIssueStatusModifiedEvent toEiffelIssueStatusModifiedEvent(ImmutableJiraIssueRelatedEvent jiraEvent);
+
     EiffelIssueType toEiffelIssueType(JiraIssueType jiraType);
 
+    ImmutableEiffelAssignee toEiffelAssignee(ImmutableJiraAssignee jiraAssignee);
+
+    EiffelIssueStatusCategory toEiffelIssueStatusCategory(JiraIssueStatusCategoryName jiraCategoryName);
 }

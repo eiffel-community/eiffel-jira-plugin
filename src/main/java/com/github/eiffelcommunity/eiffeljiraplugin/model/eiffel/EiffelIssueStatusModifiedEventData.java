@@ -15,27 +15,19 @@
  * limitations under the License.
  */
 
-package com.github.eiffelcommunity.eiffeljiraplugin.model.jira;
+package com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.github.eiffelcommunity.eiffeljiraplugin.annotations.EiffelStyleImmutable;
 import org.immutables.value.Value;
 
+import java.util.Optional;
+
 @Value.Immutable
-@JsonSerialize
-@JsonDeserialize
-@JsonIgnoreProperties(ignoreUnknown = true)
-public interface JiraIssueRelatedEvent {
-    @JsonProperty("webhookEvent")
-    JiraWebhookEventType webhookEventType();
+@EiffelStyleImmutable
+public interface EiffelIssueStatusModifiedEventData {
 
-    @JsonProperty("issue_event_type_name")
-    JiraIssueEventType issueEventType();
+    EiffelIssueStatusCategory category();
 
-    long timestamp();
-
-    ImmutableJiraIssue issue();
+    Optional<String> status();
 
 }

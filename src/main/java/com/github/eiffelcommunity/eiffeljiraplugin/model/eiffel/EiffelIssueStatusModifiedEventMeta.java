@@ -20,19 +20,35 @@ package com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
 import com.github.eiffelcommunity.eiffeljiraplugin.annotations.EiffelStyleImmutable;
 import org.immutables.value.Value;
 
-import java.net.URI;
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Value.Immutable
 @EiffelStyleImmutable
-public interface EiffelIssueDefinedEventData {
-    EiffelIssueType type();
+public interface EiffelIssueStatusModifiedEventMeta extends Meta {
+    @Value.Default
+    default UUID id() {
+        return UUID.randomUUID();
+    }
 
-    String tracker();
+    @Value.Default
+    default long time() {
+        return System.currentTimeMillis();
+    }
 
-    URI uri();
+    @Value.Derived
+    default String type() {
+        return "EiffelIssueStatusModifiedEvent";
+    }
 
-    String id();
+    // TODO: Consider possible solutions to versioning.
+    @Value.Derived
+    default String version() {
+        return "1.0.0";
+    }
 
-    Optional<String> title();
+    Optional<List<String>> tags();
+
+    Optional<ImmutableSource> source();
 }

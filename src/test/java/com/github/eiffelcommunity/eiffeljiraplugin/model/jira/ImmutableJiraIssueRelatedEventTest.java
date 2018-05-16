@@ -60,7 +60,7 @@ public class ImmutableJiraIssueRelatedEventTest {
     public void parseJiraIssueCreatedEvent() throws Exception {
         ImmutableJiraIssueRelatedEvent expected = ImmutableJiraIssueRelatedEvent.builder()
                 .webhookEventType(JiraWebhookEventType.CREATED)
-                .issueEventType("issue_created")
+                .issueEventType(JiraIssueEventType.CREATED)
                 .timestamp(1517840805048L)
                 .issue(ImmutableJiraIssue.builder()
                         .id("10032")
@@ -75,6 +75,7 @@ public class ImmutableJiraIssueRelatedEventTest {
                                                 .name(JiraIssueStatusCategoryName.NEW)
                                                 .build())
                                         .build())
+                                .title("Epic summary")
                                 .build())
                         .build())
                 .build();
@@ -88,7 +89,7 @@ public class ImmutableJiraIssueRelatedEventTest {
     public void parseJiraIssueAssignedEvent() throws Exception {
         ImmutableJiraIssueRelatedEvent expected = ImmutableJiraIssueRelatedEvent.builder()
                 .webhookEventType(JiraWebhookEventType.UPDATED)
-                .issueEventType("issue_assigned")
+                .issueEventType(JiraIssueEventType.ASSIGNED)
                 .timestamp(1520221555849L)
                 .issue(ImmutableJiraIssue.builder()
                         .id("10042")
@@ -108,6 +109,7 @@ public class ImmutableJiraIssueRelatedEventTest {
                                                 .name(JiraIssueStatusCategoryName.NEW)
                                                 .build())
                                         .build())
+                                .title("Issue summary")
                                 .build())
                         .build())
                 .build();
@@ -121,7 +123,7 @@ public class ImmutableJiraIssueRelatedEventTest {
     public void parseJiraIssueStatusUpdatedToInProgressEvent() throws Exception {
         ImmutableJiraIssueRelatedEvent expected = ImmutableJiraIssueRelatedEvent.builder()
                 .webhookEventType(JiraWebhookEventType.UPDATED)
-                .issueEventType("issue_generic")
+                .issueEventType(JiraIssueEventType.UPDATED)
                 .timestamp(1520222583834L)
                 .issue(ImmutableJiraIssue.builder()
                         .id("10042")
@@ -141,6 +143,7 @@ public class ImmutableJiraIssueRelatedEventTest {
                                                 .name(JiraIssueStatusCategoryName.IN_PROGRESS)
                                                 .build())
                                         .build())
+                                .title("Issue summary")
                                 .build())
                         .build())
                 .build();
@@ -154,7 +157,7 @@ public class ImmutableJiraIssueRelatedEventTest {
     public void parseJiraIssueStatusUpdatedToComplete() throws Exception {
         ImmutableJiraIssueRelatedEvent expected = ImmutableJiraIssueRelatedEvent.builder()
                 .webhookEventType(JiraWebhookEventType.UPDATED)
-                .issueEventType("issue_generic")
+                .issueEventType(JiraIssueEventType.UPDATED)
                 .timestamp(1520270021381L)
                 .issue(ImmutableJiraIssue.builder()
                         .id("10042")
@@ -174,6 +177,7 @@ public class ImmutableJiraIssueRelatedEventTest {
                                                 .name(JiraIssueStatusCategoryName.COMPLETE)
                                                 .build())
                                         .build())
+                                .title("Issue summary")
                                 .build())
                         .build())
                 .build();
