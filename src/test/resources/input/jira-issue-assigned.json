@@ -127,7 +127,7 @@
       "aggregatetimeestimate": null,
       "customfield_10009": null,
       "attachment": [],
-      "summary": "Issue sumary",
+      "summary": "Issue summary",
       "creator": {
         "self": "https://eiffelplugin.atlassian.net/rest/api/2/user?username=admin",
         "name": "admin",

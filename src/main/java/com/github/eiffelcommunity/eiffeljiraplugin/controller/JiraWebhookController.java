@@ -18,7 +18,9 @@
 package com.github.eiffelcommunity.eiffeljiraplugin.controller;
 
 
+import com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.ImmutableEiffelIssueAssignedEvent;
 import com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.ImmutableEiffelIssueDefinedEvent;
+import com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.ImmutableEiffelIssueStatusModifiedEvent;
 import com.github.eiffelcommunity.eiffeljiraplugin.model.jira.ImmutableJiraIssueRelatedEvent;
 import com.github.eiffelcommunity.eiffeljiraplugin.service.EiffelRabbitService;
 import com.github.eiffelcommunity.eiffeljiraplugin.service.JiraEiffelMappingService;
@@ -48,13 +50,30 @@ public class JiraWebhookController {
     @RequestMapping(value = "/webhooks/jira", method = {RequestMethod.POST})
     public ResponseEntity<?> jiraWebhookEvent(@RequestBody ImmutableJiraIssueRelatedEvent jiraEvent) {
 
-        // Right now we're only interested in issue_created events, as we're only
-        // defining EiffelIssueDefinedEvent.
-        switch (jiraEvent.webhookEventType()) {
+        // This duplication should be fixed,
+        switch (jiraEvent.issueEventType()) {
             case CREATED:
-                ImmutableEiffelIssueDefinedEvent eiffelEvent = mappingService.toEiffelIssueDefinedEvent(jiraEvent);
+                ImmutableEiffelIssueDefinedEvent eiffelDefinedEvent = mappingService.toEiffelIssueDefinedEvent(jiraEvent);
                 try {
-                    rabbitService.publish(eiffelEvent);
+                    rabbitService.publish(eiffelDefinedEvent);
+                    return ResponseEntity.ok().build();
+                } catch (Exception e) {
+                    LOG.error(e.getMessage());
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+                }
+            case ASSIGNED:
+                ImmutableEiffelIssueAssignedEvent eiffelAssignedEvent = mappingService.toEiffelIssueAssignedEvent(jiraEvent);
+                try {
+                    rabbitService.publish(eiffelAssignedEvent);
+                    return ResponseEntity.ok().build();
+                } catch (Exception e) {
+                    LOG.error(e.getMessage());
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+                }
+            case UPDATED:
+                ImmutableEiffelIssueStatusModifiedEvent eiffelStatusModifiedEvent = mappingService.toEiffelIssueStatusModifiedEvent(jiraEvent);
+                try {
+                    rabbitService.publish(eiffelStatusModifiedEvent);
                     return ResponseEntity.ok().build();
                 } catch (Exception e) {
                     LOG.error(e.getMessage());

@@ -17,22 +17,8 @@
 
 package com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
 
-import com.github.eiffelcommunity.eiffeljiraplugin.annotations.EiffelStyleImmutable;
-import org.immutables.value.Value;
-
-import java.net.URI;
-import java.util.Optional;
-
-@Value.Immutable
-@EiffelStyleImmutable
-public interface EiffelIssueDefinedEventData {
-    EiffelIssueType type();
-
-    String tracker();
-
-    URI uri();
-
-    String id();
-
-    Optional<String> title();
+public enum EiffelIssueStatusCategory {
+    OPEN,
+    ACTIVE,
+    RESOLVED
 }

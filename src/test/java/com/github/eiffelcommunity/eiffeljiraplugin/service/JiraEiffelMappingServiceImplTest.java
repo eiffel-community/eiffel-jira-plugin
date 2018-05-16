@@ -66,6 +66,7 @@ public class JiraEiffelMappingServiceImplTest {
                         .type(EiffelIssueType.OTHER)
                         .uri(URI.create("https://eiffelplugin.atlassian.net/rest/api/2/issue/10032"))
                         .id("10032")
+                        .title("Epic summary")
                         .build())
                 .links(new ArrayList<>())
                 .build();

@@ -19,10 +19,12 @@ package com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.eiffelcommunity.eiffeljiraplugin.service.EiffelRabbitService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.URI;
@@ -35,6 +37,9 @@ import static org.junit.Assert.assertThat;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class EiffelIssueDefinedEventTest {
+
+    @MockBean
+    EiffelRabbitService rabbitService;
 
     @Autowired
     private ObjectMapper mapper;

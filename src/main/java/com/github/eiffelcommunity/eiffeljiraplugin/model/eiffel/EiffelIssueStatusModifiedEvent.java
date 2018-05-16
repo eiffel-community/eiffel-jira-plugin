@@ -15,28 +15,20 @@
  * limitations under the License.
  */
 
-package com.github.eiffelcommunity.eiffeljiraplugin.model.jira;
+package com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.github.eiffelcommunity.eiffeljiraplugin.annotations.EiffelStyleImmutable;
 import org.immutables.value.Value;
 
-import java.util.Optional;
+import java.util.List;
 
 @Value.Immutable
-@JsonSerialize
-@JsonDeserialize
-@JsonIgnoreProperties(ignoreUnknown = true)
-public interface JiraIssueFields {
-    @JsonProperty("issuetype")
-    ImmutableJiraFieldsIssueType issueType();
+@EiffelStyleImmutable
+public interface EiffelIssueStatusModifiedEvent extends Event {
+    ImmutableEiffelIssueStatusModifiedEventMeta meta();
 
-    Optional<ImmutableJiraAssignee> assignee();
+    ImmutableEiffelIssueStatusModifiedEventData data();
 
-    @JsonProperty("summary")
-    String title();
-
-    ImmutableJiraIssueStatus status();
+    // TODO: Validate link types
+    List<ImmutableLink> links();
 }

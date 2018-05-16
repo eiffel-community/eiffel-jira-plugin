@@ -17,25 +17,10 @@
 
 package com.github.eiffelcommunity.eiffeljiraplugin.model.jira;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import org.immutables.value.Value;
 
-@Value.Immutable
-@JsonSerialize
-@JsonDeserialize
-@JsonIgnoreProperties(ignoreUnknown = true)
-public interface JiraIssueRelatedEvent {
-    @JsonProperty("webhookEvent")
-    JiraWebhookEventType webhookEventType();
-
-    @JsonProperty("issue_event_type_name")
-    JiraIssueEventType issueEventType();
-
-    long timestamp();
-
-    ImmutableJiraIssue issue();
-
+public enum JiraIssueEventType {
+    @JsonProperty("issue_created") CREATED,
+    @JsonProperty("issue_assigned") ASSIGNED,
+    @JsonProperty("issue_generic") UPDATED,
 }

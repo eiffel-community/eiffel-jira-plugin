@@ -18,17 +18,24 @@
 package com.github.eiffelcommunity.eiffeljiraplugin.service;
 
 import com.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.*;
-import com.github.eiffelcommunity.eiffeljiraplugin.model.jira.ImmutableJiraIssue;
-import com.github.eiffelcommunity.eiffeljiraplugin.model.jira.ImmutableJiraIssueRelatedEvent;
-import com.github.eiffelcommunity.eiffeljiraplugin.model.jira.JiraIssueType;
+import com.github.eiffelcommunity.eiffeljiraplugin.model.jira.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class JiraEiffelMappingServiceImpl implements JiraEiffelMappingService {
     private static final String JIRA_TRACKER = "JIRA";
+    private final EiffelEventRepository eventRepository;
+
+    @Autowired
+    public JiraEiffelMappingServiceImpl(EiffelEventRepository eventRepository) {
+        this.eventRepository = eventRepository;
+    }
+
     // TODO: Consider ways to support versioning of the event.
 
     @Override
@@ -43,14 +50,60 @@ public class JiraEiffelMappingServiceImpl implements JiraEiffelMappingService {
                 .uri(jiraIssue.self())
                 .tracker(JIRA_TRACKER)
                 .type(toEiffelIssueType(jiraIssue.fields().issueType().issueType()))
+                .title(jiraIssue.fields().title())
                 .build();
 
         List<ImmutableLink> links = new ArrayList<>();
 
-        return ImmutableEiffelIssueDefinedEvent.builder()
+        ImmutableEiffelIssueDefinedEvent event = ImmutableEiffelIssueDefinedEvent.builder()
                 .meta(meta)
                 .data(data)
                 .links(links)
+                .build();
+        eventRepository.saveIssueDefinedEvent(event);
+        return event;
+    }
+
+    @Override
+    public ImmutableEiffelIssueAssignedEvent toEiffelIssueAssignedEvent(ImmutableJiraIssueRelatedEvent jiraEvent) {
+        ImmutableJiraIssue jiraIssue = jiraEvent.issue();
+
+        ImmutableEiffelIssueAssignedEventMeta meta = ImmutableEiffelIssueAssignedEventMeta.builder()
+                .time(jiraEvent.timestamp()).build();
+
+
+        ImmutableEiffelIssueAssignedEventData data = ImmutableEiffelIssueAssignedEventData.builder()
+                .addAssignees(toEiffelAssignee(jiraIssue.fields().assignee().orElseThrow(IllegalStateException::new)))
+                .build();
+
+        UUID uuid = eventRepository.getIssueDefinedEventID(jiraIssue.self());
+
+        return ImmutableEiffelIssueAssignedEvent.builder()
+                .meta(meta)
+                .data(data)
+                .addLinks(ImmutableLink.builder().target(uuid).type("ISSUE").build())
+                .build();
+    }
+
+    @Override
+    public ImmutableEiffelIssueStatusModifiedEvent toEiffelIssueStatusModifiedEvent(ImmutableJiraIssueRelatedEvent jiraEvent) {
+        ImmutableJiraIssue jiraIssue = jiraEvent.issue();
+
+        ImmutableEiffelIssueStatusModifiedEventMeta meta = ImmutableEiffelIssueStatusModifiedEventMeta.builder()
+                .time(jiraEvent.timestamp()).build();
+
+
+        ImmutableEiffelIssueStatusModifiedEventData data = ImmutableEiffelIssueStatusModifiedEventData.builder()
+                .category(toEiffelIssueStatusCategory(jiraIssue.fields().status().category().name()))
+                .status(jiraIssue.fields().status().name())
+                .build();
+
+        UUID uuid = eventRepository.getIssueDefinedEventID(jiraIssue.self());
+
+        return ImmutableEiffelIssueStatusModifiedEvent.builder()
+                .meta(meta)
+                .data(data)
+                .addLinks(ImmutableLink.builder().target(uuid).type("ISSUE").build())
                 .build();
     }
 
@@ -72,6 +125,29 @@ public class JiraEiffelMappingServiceImpl implements JiraEiffelMappingService {
                 return EiffelIssueType.OTHER;
             default:
                 return EiffelIssueType.OTHER;
+        }
+    }
+
+    @Override
+    public ImmutableEiffelAssignee toEiffelAssignee(ImmutableJiraAssignee jiraAssignee) {
+        return ImmutableEiffelAssignee.builder()
+                .email(jiraAssignee.emailAddress())
+                .name(jiraAssignee.displayName())
+                .id(jiraAssignee.username())
+                .build();
+    }
+
+    @Override
+    public EiffelIssueStatusCategory toEiffelIssueStatusCategory(JiraIssueStatusCategoryName jiraCategoryName) {
+        switch (jiraCategoryName) {
+            case NEW:
+                return EiffelIssueStatusCategory.OPEN;
+            case IN_PROGRESS:
+                return EiffelIssueStatusCategory.ACTIVE;
+            case COMPLETE:
+                return EiffelIssueStatusCategory.RESOLVED;
+            default:
+                return EiffelIssueStatusCategory.OPEN;
         }
     }
 }
