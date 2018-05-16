@@ -54,6 +54,7 @@ public class EiffelRabbitServiceImpl implements EiffelRabbitService {
             LOG.error("No routing key found for " + eiffelEvent.meta().type());
             throw new UnsupportedOperationException("Don't have a routing key for " + eiffelEvent.meta().type());
         }
+        LOG.info("Publishing " + eiffelEvent.meta().type() + " to RabbitMQ with routing key: " + routingKey.get());
         publish(routingKey.get(), eiffelEvent);
     }
 
@@ -92,6 +93,12 @@ public class EiffelRabbitServiceImpl implements EiffelRabbitService {
         switch (type) {
             case "EiffelIssueDefinedEvent": {
                 return Optional.of("eiffel.issue.created");
+            }
+            case "EiffelIssueStatusModifiedEvent": {
+                return Optional.of("eiffel.issue.updated");
+            }
+            case "EiffelIssueAssignedEvent": {
+                return Optional.of("eiffel.issue.assigned");
             }
             default:
                 return Optional.empty();
