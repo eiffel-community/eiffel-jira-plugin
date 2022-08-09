@@ -32,15 +32,15 @@ jobs:
           distribution: 'corretto' 
           java-version: '8'
                    
-      - name: Gradle caching
+      - name: Before caching
         run: |
-           rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-           rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+           rm -f  ~/.gradle/caches/modules-2/modules-2.lock
+           rm -fr ~/.gradle/caches/*/plugin-resolution/
            
       - name: Cache Gradle Directories
         uses: actions/cache@v3
         with:
          path: |
-            $HOME/.gradle/caches/
-            $HOME/.gradle/wrapper/
-         key: modules-2
+            ~/.gradle/caches/
+            ~/.gradle/wrapper/
+         key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts') }}
