@@ -44,5 +44,5 @@ jobs:
       - name: Verify
         shell: bash
         run: |
-          ll ~/.gradle/caches/
-          ll ~/.gradle/wrapper/
+          ls ~/.gradle/caches/
+          ls ~/.gradle/wrapper/
