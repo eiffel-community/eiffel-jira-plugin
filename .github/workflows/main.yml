@@ -41,7 +41,6 @@ jobs:
          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts') }}
          
       - name: Verify
-        working-directory: .gradle/caches/
         shell: bash
         run: |
-          ls -la
+          ls -la $HOME/.gradle/caches/
