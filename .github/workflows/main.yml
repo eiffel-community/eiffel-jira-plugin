@@ -17,7 +17,7 @@ on:
 jobs:
   # This workflow contains a single job called "caching"
   caching:    
-    if: github.repository == 'eiffel-community/eiffel-jira-plugin'
+    # if: github.repository == 'eiffel-community/eiffel-jira-plugin'
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     container: gradle:jdk8
@@ -40,3 +40,8 @@ jobs:
             ~/.gradle/caches/
             ~/.gradle/wrapper/
          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts') }}
+         
+      - name: Verify
+        run: |
+          ll ~/.gradle/caches/
+          ll ~/.gradle/wrapper/
