@@ -34,7 +34,7 @@ jobs:
            rm -fr ~/.gradle/caches/*/plugin-resolution/
            
       - name: Cache Gradle Directories
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
            ~/.gradle/caches
